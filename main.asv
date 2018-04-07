@@ -1,0 +1,28 @@
+% Scott Barnes & Chris Poole
+% MAE 6245: Robotic Systems
+% Final Project 
+clc; clear; close all;
+% Simulates quadcopter with inverted pendulum
+% Define Variables
+g = 9.8;
+M_r = 100;
+m_p = 1;
+L = 0.5;
+I_x = 10;
+I_y = 10;
+I_z = 10;
+% Create Open Loop Model
+[A, B, C, D] = olSys(g, M_r, m_p, L, I_x, I_y, I_z);
+% Validate Controllability & Observability
+is_controllable(A, B);
+is_observable(A, C);
+% Create Control Law
+G = optimalLQR(A, B, C, D);
+% Creat Closed Loop System
+Ac = A-B*G;
+cl_Sys = ss(Ac, B, C, D);
+% Simulate System
+t = 0:1:100;
+u = ones(4, length(t));
+y = lsim(cl_Sys, u, t);
+% Format Output
