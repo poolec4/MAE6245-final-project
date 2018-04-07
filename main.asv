@@ -13,16 +13,34 @@ I_y = 10;
 I_z = 10;
 % Create Open Loop Model
 [A, B, C, D] = olSys(g, M_r, m_p, L, I_x, I_y, I_z);
+ol_Sys = ss(A, B, C, D);
 % Validate Controllability & Observability
-is_controllable(A, B);
-is_observable(A, C);
+% is_controllable(A, B);
+% is_observable(A, C);
 % Create Control Law
 G = optimalLQR(A, B, C, D);
 % Creat Closed Loop System
 Ac = A-B*G;
 cl_Sys = ss(Ac, B, C, D);
 % Simulate System
-t = 0:1:100;
+t = 0:0.01:10;
+% u = [t; -t; ones(1, length(t)); -ones(1, length(t))];
 u = ones(4, length(t));
-y = lsim(cl_Sys, u, t);
-% Format Output
+% Simulate Closed Loop System
+[y, t, x] = lsim(cl_Sys, u, t); % Closed Loop System Clearly Stable
+inpt = G*x';
+figure;
+subplot(3, 1, 1);
+plot(t, y(:, 1), 'r', t, y(:, 2), 'g', t, y(:, 3), 'b'); %, t, inpt, '--');
+title('Quadrotor Position');
+legend('X', 'Y', 'Z');
+xlabel('Displacement (Meters)');
+ylabel('Time (seconds)');
+subplot(3, 1, 2);
+plot(t, y(:, 1), 'r', t, y(:, 2), 'g', t, y(:, 3), 'b');
+title('Quadrotor Orientation');
+xlab
+% Plot Order: X_q, Y_q, Z_q, Y_p, Theta_p, Roll, Pitch, Yaw
+% Simulate Open Loop System
+% figure;
+% lsim(ol_Sys, u, t) % Open Loop System Clearly Unstable

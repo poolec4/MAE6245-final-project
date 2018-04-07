@@ -23,12 +23,32 @@ G = optimalLQR(A, B, C, D);
 Ac = A-B*G;
 cl_Sys = ss(Ac, B, C, D);
 % Simulate System
-t = 0:1:100;
+t = 0:0.01:50;
 % u = [t; -t; ones(1, length(t)); -ones(1, length(t))];
 u = ones(4, length(t));
 % Simulate Closed Loop System
-lsim(cl_Sys, u, t) % Closed Loop System Clearly Stable
+[y, t, x] = lsim(cl_Sys, u, t); % Closed Loop System Clearly Stable
+inpt = G*x';
+figure;
+subplot(3, 1, 1);
+plot(t, y(:, 1), 'r', t, y(:, 2), 'g', t, y(:, 3), 'b'); %, t, inpt, '--');
+title('Quadrotor Position');
+legend('X', 'Y', 'Z');
+ylabel('Displacement (Meters)');
+xlabel('Time (seconds)');
+subplot(3, 1, 2);
+plot(t, y(:, 6)*180/pi, 'r', t, y(:, 7)*180/pi, 'g', t, y(:, 8)*180/pi, 'b');
+title('Quadrotor Orientation');
+legend('Roll', 'Pitch', 'Yaw');
+ylabel('Angle (deg)');
+xlabel('Time (sec)');
+subplot(3, 1, 3);
+plot(t, y(:, 4), 'r', t, y(:, 5)*180/pi, 'g');
+title('Pendulum Angle & Position');
+legend('Position', 'Angle');
+ylabel('Magnitude');
+xlabel('Time (sec)');
 % Plot Order: X_q, Y_q, Z_q, Y_p, Theta_p, Roll, Pitch, Yaw
 % Simulate Open Loop System
-figure;
-lsim(ol_Sys, u, t) % Open Loop System Clearly Unstable
+% figure;
+% lsim(ol_Sys, u, t) % Open Loop System Clearly Unstable
