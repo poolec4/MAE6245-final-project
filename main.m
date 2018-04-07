@@ -25,7 +25,8 @@ cl_Sys = ss(Ac, B, C, D);
 % Simulate System
 t = 0:0.01:10;
 % u = [t; -t; ones(1, length(t)); -ones(1, length(t))];
-u = [ones(3, length(t)); zeros(1, length(t))];
+% u = [ones(3, length(t)); zeros(1, length(t))];
+u = zeros(4, length(t));
 % Simulate Closed Loop System
 [y, t, x] = lsim(cl_Sys, u, t, x0); % Closed Loop System Clearly Stable
 inpt = G*x';
