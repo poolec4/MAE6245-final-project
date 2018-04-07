@@ -29,6 +29,9 @@ function [A, B, C, D] = olSys(g, M_q, m_p, L, I_x, I_y, I_z)
     C(3, 3) = 1;
     C(4, 13) = 1;
     C(5, 14) = 1;
+    C(6, 7) = 1;
+    C(7, 8) = 1;
+    C(8, 9) = 1;
     % D Matrix
     D = 0;
 end

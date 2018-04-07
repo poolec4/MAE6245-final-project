@@ -28,7 +28,7 @@ t = 0:1:100;
 u = ones(4, length(t));
 % Simulate Closed Loop System
 lsim(cl_Sys, u, t) % Closed Loop System Clearly Stable
-% Plot Order: X_q, Y_q, Z_q, Y_p, Theta_p
+% Plot Order: X_q, Y_q, Z_q, Y_p, Theta_p, Roll, Pitch, Yaw
 % Simulate Open Loop System
-% figure;
-% lsim(ol_Sys, u, t) % Open Loop System Clearly Unstable
+figure;
+lsim(ol_Sys, u, t) % Open Loop System Clearly Unstable
