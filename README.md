@@ -1,3 +1,3 @@
 # MAE6245-final-project
 
-Full dynamic simulation and vizualization of 6DoF quadrotor.
+Full dynamic simulation, control, and vizualization of 6DoF quadrotor with attached inverted pendulum.
