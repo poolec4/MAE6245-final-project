@@ -1,5 +1,5 @@
 
-function [A, B, C, D] = olSys(g, M_q, m_p, L, I_x, I_y, I_z)
+function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z)
     % Create A Matrix
     A = zeros(16, 16);
     A(1, 4) = 1;
@@ -34,4 +34,7 @@ function [A, B, C, D] = olSys(g, M_q, m_p, L, I_x, I_y, I_z)
     C(8, 9) = 1;
     % D Matrix
     D = 0;
+    % Initial State
+    x0 = zeros(1, 16);
+    x0(14) = pi/8; % Offset Starting Angle
 end

@@ -12,7 +12,7 @@ I_x = 10;
 I_y = 10;
 I_z = 10;
 % Create Open Loop Model
-[A, B, C, D] = olSys(g, M_r, m_p, L, I_x, I_y, I_z);
+[A, B, C, D , x0] = olSys(g, M_r, m_p, L, I_x, I_y, I_z);
 ol_Sys = ss(A, B, C, D);
 % Validate Controllability & Observability
 % is_controllable(A, B);
@@ -23,11 +23,11 @@ G = optimalLQR(A, B, C, D);
 Ac = A-B*G;
 cl_Sys = ss(Ac, B, C, D);
 % Simulate System
-t = 0:0.01:50;
+t = 0:0.01:10;
 % u = [t; -t; ones(1, length(t)); -ones(1, length(t))];
-u = ones(4, length(t));
+u = [ones(3, length(t)); zeros(1, length(t))];
 % Simulate Closed Loop System
-[y, t, x] = lsim(cl_Sys, u, t); % Closed Loop System Clearly Stable
+[y, t, x] = lsim(cl_Sys, u, t, x0); % Closed Loop System Clearly Stable
 inpt = G*x';
 figure;
 subplot(3, 1, 1);
@@ -46,7 +46,7 @@ subplot(3, 1, 3);
 plot(t, y(:, 4), 'r', t, y(:, 5)*180/pi, 'g');
 title('Pendulum Angle & Position');
 legend('Position', 'Angle');
-ylabel('Magnitude');
+ylabel('Magnitude (deg//meters)');
 xlabel('Time (sec)');
 % Plot Order: X_q, Y_q, Z_q, Y_p, Theta_p, Roll, Pitch, Yaw
 % Simulate Open Loop System
