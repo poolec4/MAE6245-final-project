@@ -2,12 +2,14 @@
 % MAE 6245: Robotic Systems
 % Final Project 
 clc; clear; close all;
+addpath('common_functions')
+
 % Simulates quadcopter with inverted pendulum
 % Define Variables
 g = 9.8;
 M_r = 100;
 m_p = 1;
-L = 0.5;
+L = 1;
 I_x = 10;
 I_y = 10;
 I_z = 10;
@@ -49,6 +51,32 @@ title('Pendulum Angle & Position');
 legend('Position', 'Angle');
 ylabel('Magnitude (deg//meters)');
 xlabel('Time (sec)');
+
+filename = 'E:\MAE6245-final-project\media\1dofpend.gif';
+frame_dt = 10/length(t);
+h = figure;
+for i = 1:length(t)
+    x_g = [y(i, 1), y(i, 2), y(i, 3)];
+    eul = [y(i, 6), y(i, 7), y(i, 8)];
+    draw_quadrotor(x_g, eul)
+    th = pi/2 - y(i,5);
+    p_pend = x_g + [L*cos(th), 0, L*sin(th)]; % relative to quad COM
+    draw_vector(x_g, p_pend,'r')
+    axis([-5 10 -2 2 -2 2])
+    %drawnow
+    view(-20, 20)
+    
+    frame = getframe(h); 
+    im = frame2im(frame); 
+    [imind,cm] = rgb2ind(im,256); 
+    % Write to the GIF File 
+    if i == 1 
+      imwrite(imind,cm,filename,'gif','DelayTime',frame_dt,'Loopcount',inf); 
+    else 
+      imwrite(imind,cm,filename,'gif','DelayTime',frame_dt,'WriteMode','append'); 
+    end 
+end
+
 % Plot Order: X_q, Y_q, Z_q, Y_p, Theta_p, Roll, Pitch, Yaw
 % Simulate Open Loop System
 % figure;
