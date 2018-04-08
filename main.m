@@ -25,7 +25,7 @@ G = optimalLQR(A, B, C, D);
 Ac = A-B*G;
 cl_Sys = ss(Ac, B, C, D);
 % Simulate System
-t = 0:0.01:10;
+t = 0:0.1:10;
 % u = [t; -t; ones(1, length(t)); -ones(1, length(t))];
 % u = [ones(3, length(t)); zeros(1, length(t))];
 u = zeros(4, length(t));
@@ -47,14 +47,23 @@ ylabel('Angle (deg)');
 xlabel('Time (sec)');
 subplot(3, 1, 3);
 plot(t, y(:, 4), 'r', t, y(:, 5)*180/pi, 'g');
-title('Pendulum Angle & Position');
+title('Pendulum Angle \& Position');
 legend('Position', 'Angle');
 ylabel('Magnitude (deg//meters)');
 xlabel('Time (sec)');
 
 filename = 'E:\MAE6245-final-project\media\1dofpend.gif';
-frame_dt = 10/length(t);
+
 h = figure;
+x_g = [y(1, 1), y(1, 2), y(1, 3)];
+eul = [y(1, 6), y(1, 7), y(1, 8)];
+draw_quadrotor(x_g, eul)
+axis([-5 10 -2 2 -2 2])
+view(-20, 20)
+f = getframe(gcf);
+[im,map] = rgb2ind(f.cdata,256,'nodither');
+im(1,1,1,length(t)) = 0;
+
 for i = 1:length(t)
     x_g = [y(i, 1), y(i, 2), y(i, 3)];
     eul = [y(i, 6), y(i, 7), y(i, 8)];
@@ -66,16 +75,11 @@ for i = 1:length(t)
     %drawnow
     view(-20, 20)
     
-    frame = getframe(h); 
-    im = frame2im(frame); 
-    [imind,cm] = rgb2ind(im,256); 
-    % Write to the GIF File 
-    if i == 1 
-      imwrite(imind,cm,filename,'gif','DelayTime',frame_dt,'Loopcount',inf); 
-    else 
-      imwrite(imind,cm,filename,'gif','DelayTime',frame_dt,'WriteMode','append'); 
-    end 
+    f = getframe(gcf);
+    im(:,:,1,i) = rgb2ind(f.cdata,map,'nodither');
 end
+
+imwrite(im,map,filename,'DelayTime',0,'LoopCount',inf)
 
 % Plot Order: X_q, Y_q, Z_q, Y_p, Theta_p, Roll, Pitch, Yaw
 % Simulate Open Loop System
