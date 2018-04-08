@@ -21,7 +21,7 @@ ol_Sys = ss(A, B, C, D);
 % is_observable(A, C);
 % Create Control Law
 G = optimalLQR(A, B, C, D);
-% Creat Closed Loop System
+% Create Closed Loop System
 Ac = A-B*G;
 cl_Sys = ss(Ac, B, C, D);
 % Simulate System
@@ -49,7 +49,7 @@ subplot(3, 1, 3);
 plot(t, y(:, 4), 'r', t, y(:, 5)*180/pi, 'g');
 title('Pendulum Angle \& Position');
 legend('Position', 'Angle');
-ylabel('Magnitude (deg//meters)');
+ylabel('Magnitude (deg/meters)');
 xlabel('Time (sec)');
 
 filename = 'E:\MAE6245-final-project\media\1dofpend.gif';
@@ -72,9 +72,9 @@ for i = 1:length(t)
     p_pend = x_g + [L*cos(th), 0, L*sin(th)]; % relative to quad COM
     draw_vector(x_g, p_pend,'r')
     axis([-5 10 -2 2 -2 2])
-    %drawnow
     view(-20, 20)
     
+    drawnow
     f = getframe(gcf);
     im(:,:,1,i) = rgb2ind(f.cdata,map,'nodither');
 end
