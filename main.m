@@ -25,9 +25,10 @@ G = optimalLQR(A, B, C, D);
 Ac = A-B*G;
 cl_Sys = ss(Ac, B, C, D);
 % Simulate System
-t = 0:0.1:10;
+t = 0:0.1:20;
 % u = [t; -t; ones(1, length(t)); -ones(1, length(t))];
 % u = [ones(3, length(t)); zeros(1, length(t))];
+% u = [zeros(1, length(t)); 5*ones(1, length(t)); 5*ones(1, length(t)); zeros(1, length(t))];
 u = zeros(4, length(t));
 % Simulate Closed Loop System
 [y, t, x] = lsim(cl_Sys, u, t, x0); % Closed Loop System Clearly Stable
@@ -58,7 +59,7 @@ h = figure;
 x_g = [y(1, 1), y(1, 2), y(1, 3)];
 eul = [y(1, 6), y(1, 7), y(1, 8)];
 draw_quadrotor(x_g, eul)
-axis([-5 10 -2 2 -2 2])
+axis([-5 10 -1 5 -2 2])
 view(-20, 20)
 f = getframe(gcf);
 [im,map] = rgb2ind(f.cdata,256,'nodither');
@@ -71,7 +72,7 @@ for i = 1:length(t)
     th = pi/2 - y(i,5);
     p_pend = x_g + [L*cos(th), 0, L*sin(th)]; % relative to quad COM
     draw_vector(x_g, p_pend,'r')
-    axis([-5 10 -2 2 -2 2])
+    axis([-5 10 -1 5 -2 2])
     view(-20, 20)
     
     drawnow
@@ -79,7 +80,7 @@ for i = 1:length(t)
     im(:,:,1,i) = rgb2ind(f.cdata,map,'nodither');
 end
 
-imwrite(im,map,filename,'DelayTime',0,'LoopCount',inf)
+% imwrite(im,map,filename,'DelayTime',0,'LoopCount',inf)
 
 % Plot Order: X_q, Y_q, Z_q, Y_p, Theta_p, Roll, Pitch, Yaw
 % Simulate Open Loop System

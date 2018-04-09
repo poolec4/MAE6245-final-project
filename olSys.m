@@ -10,6 +10,7 @@ function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z)
     A(7, 10) = 1;
     A(8, 11) = 1;
     A(9, 12) = 1;
+    A(13, 4) = 1;
     A(13, 15) = 1;
     A(14, 16) = 1;
     A(15, 8) = -g;
@@ -36,5 +37,7 @@ function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z)
     D = 0;
     % Initial State
     x0 = zeros(1, 16);
-    x0(14) = pi/8; % Offset Starting Angle
+    x0(14) = pi/18; % Offset Starting Angle
+    x0(1) = 1;
+    x0(13) = x0(1);
 end
