@@ -59,7 +59,7 @@ h = figure;
 x_g = [y(1, 1), y(1, 2), y(1, 3)];
 eul = [y(1, 6), y(1, 7), y(1, 8)];
 draw_quadrotor(x_g, eul)
-axis([-5 10 -1 5 -2 2])
+axis([-5 10 -2 2 -2 2])
 view(-20, 20)
 f = getframe(gcf);
 [im,map] = rgb2ind(f.cdata,256,'nodither');
@@ -72,7 +72,7 @@ for i = 1:length(t)
     th = pi/2 - y(i,5);
     p_pend = x_g + [L*cos(th), 0, L*sin(th)]; % relative to quad COM
     draw_vector(x_g, p_pend,'r')
-    axis([-5 10 -1 5 -2 2])
+    axis([-5 10 -2 2 -2 2])
     view(-20, 20)
     
     drawnow

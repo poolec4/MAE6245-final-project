@@ -16,13 +16,10 @@
 function G = optimalLQR(A, B, C, D)
     % Q = C'*C; % Equally Weighs Observed Variables. Ignores those not in
     % observer
-    v = zeros(1, 16); 
+    v = ones(1, 16); 
     Q = diag(v); % Equally weighs all variables
-    Q(14, 14) = 10000; % Pendulum Displacement
-    Q(13, 13) = 1; % Pendulum Angle
-    Q(1, 1) = 1; % Quadrotor X Displacement
-    Q(2, 2) = 0;
-    disp(Q);
+    Q(14, 14) = 10000; % Pendulum Angle - Set for large displacement, small maximum angle
+    % Q(13, 13) = 1000; % Pendulum Displacement - Set for minimal displacement, larger angle
     v = ones(size(B, 2), 1);
     R = diag(v);
     % R = 1;
