@@ -13,8 +13,12 @@ L = 1;
 I_x = 10;
 I_y = 10;
 I_z = 10;
+% Position Control:
+x_goal = 0;
+y_goal = 1;
+z_goal = 0;
 % Create Open Loop Model
-[A, B, C, D , x0] = olSys(g, M_r, m_p, L, I_x, I_y, I_z);
+[A, B, C, D , x0] = olSys(g, M_r, m_p, L, I_x, I_y, I_z, x_goal, y_goal, z_goal);
 ol_Sys = ss(A, B, C, D);
 % Validate Controllability & Observability
 % is_controllable(A, B);
@@ -29,7 +33,7 @@ t = 0:0.1:20;
 % u = [t; -t; ones(1, length(t)); -ones(1, length(t))];
 % u = [ones(3, length(t)); zeros(1, length(t))];
 % u = [zeros(1, length(t)); 5*ones(1, length(t)); 5*ones(1, length(t)); zeros(1, length(t))];
-u = zeros(4, length(t));
+u = [zeros(4, length(t)); x_goal*ones(1, length(t)); y_goal*ones(1, length(t)); z_goal*ones(1, length(t))];
 % Simulate Closed Loop System
 [y, t, x] = lsim(cl_Sys, u, t, x0); % Closed Loop System Clearly Stable
 inpt = G*x';
@@ -48,7 +52,7 @@ ylabel('Angle (deg)');
 xlabel('Time (sec)');
 subplot(3, 1, 3);
 plot(t, y(:, 4), 'r', t, y(:, 5)*180/pi, 'g');
-title('Pendulum Angle \& Position');
+title('Pendulum Angle and Position');
 legend('Position', 'Angle');
 ylabel('Magnitude (deg/meters)');
 xlabel('Time (sec)');
