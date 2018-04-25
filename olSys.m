@@ -1,5 +1,5 @@
 
-function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z, x_goal, y_goal, z_goal)
+function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z, start_position, goal_position)
     % Create A Matrix
     A = zeros(16, 16);
     A(1, 4) = 1;
@@ -41,8 +41,8 @@ function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z, x_goal, y_goal,
     % Initial State
     x0 = zeros(1, 16);
     x0(14) = pi/18; % Offset Starting Angle
-    x0(1) = -x_goal;
-    x0(2) = -y_goal;
-    x0(3) = -z_goal;
+    x0(1) = start_position(1)-goal_position(1);
+    x0(2) = start_position(2)-goal_position(2);
+    x0(3) = start_position(3)-goal_position(3);
     x0(13) = x0(1);
 end
