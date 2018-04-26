@@ -7,22 +7,22 @@ addpath('common_functions')
 % Simulates quadcopter with inverted pendulum
 % Define Variables
 g = 9.8;
-M_r = 100;
-m_p = 1;
-L = 1;
-I_x = 10;
-I_y = 10;
-I_z = 10;
+M_r = 1000;
+m_p = 50;
+L = 0.5;
+I_x = 1;
+I_y = 1;
+I_z = 1;
 
 % Position Control:
 x_goal = 5;
 y_goal = 0;
-z_goal = -1.5;
+z_goal = 0;
 goal = [x_goal, y_goal, z_goal];
-
+tf = 10;
 % Create Trajectory
-t = 0:0.1:20;
-traj = create_trajectory('circle',4,length(t),0);
+t = 0:0.1:tf;
+[traj, vel, accel] = create_trajectory('circle',4,length(t),0, tf);
 start = traj(:,1);
 goal = traj(:,end);
 
@@ -46,7 +46,7 @@ cl_Sys = ss(Ac, B, C, D);
 % u = [ones(3, length(t)); zeros(1, length(t))];
 % u = [zeros(1, length(t)); 5*ones(1, length(t)); 5*ones(1, length(t)); zeros(1, length(t))];
 % u = [zeros(4, length(t)); x_goal*ones(1, length(t)); y_goal*ones(1, length(t)); z_goal*ones(1, length(t))];
-u = [zeros(4, length(t)); traj(1,:); traj(2,:); traj(3,:)];
+u = [zeros(4, length(t)); traj(1,:); traj(2,:); traj(3,:); vel(1,:); vel(2,:); vel(3,:); accel(1,:); accel(2,:); accel(3,:)];
 
 % Simulate Closed Loop System
 [y, t, x] = lsim(cl_Sys, u, t, x0); % Closed Loop System Clearly Stable
@@ -78,7 +78,7 @@ x_g = [y(1, 1), y(1, 2), y(1, 3)];
 eul = [y(1, 6), y(1, 7), y(1, 8)];
 draw_quadrotor(x_g, eul)
 axis([-5 10 -2 2 -2 2])
-view(-20, 20)
+% view(-20, 20)
 f = getframe(gcf);
 [im,map] = rgb2ind(f.cdata,256,'nodither');
 im(1,1,1,length(t)) = 0;
@@ -90,8 +90,8 @@ for i = 1:length(t)
     th = pi/2 - y(i,5);
     p_pend = x_g + [L*cos(th), 0, L*sin(th)]; % relative to quad COM
     draw_vector(x_g, p_pend,'r')
-    axis([-5 5 -5 5 -2 2])
-    view(-0, 0)
+    axis([-6 6 -6 6 -2 2])
+    % view(-0, 0)
     
     drawnow
     f = getframe(gcf);
