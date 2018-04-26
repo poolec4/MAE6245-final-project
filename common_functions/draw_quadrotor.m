@@ -3,7 +3,7 @@ function draw_quadrotor(x_g, eangles)
 % eangles = roll (gamma), pitch (beta), yaw (alpha) in radians
 
 v = eangles(1);
-u = -eangles(2);
+u = eangles(2);
 w = eangles(3);
 
 R_quad = rot_z(w)*rot_y(v)*rot_x(u);

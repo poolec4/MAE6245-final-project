@@ -9,10 +9,10 @@ addpath('common_functions')
 g = 9.8;
 M_r = 1000;
 m_p = 50;
-L = 0.5;
-I_x = 1;
-I_y = 1;
-I_z = 1;
+L = 1;
+I_x = 1e-5;
+I_y = 1e-5;
+I_z = 1e-5;
 
 % Position Control:
 x_goal = 5;
@@ -88,10 +88,10 @@ for i = 1:length(t)
     eul = [y(i, 6), y(i, 7), y(i, 8)];
     draw_quadrotor(x_g, eul)
     th = pi/2 - y(i,5);
-    p_pend = x_g + [L*cos(th), 0, L*sin(th)]; % relative to quad COM
+    p_pend = x_g + [-L*cos(th), 0, L*sin(th)]; % relative to quad COM
     draw_vector(x_g, p_pend,'r')
     axis([-6 6 -6 6 -2 2])
-    % view(-0, 0)
+    view(-0, 0)
     
     drawnow
     f = getframe(gcf);
