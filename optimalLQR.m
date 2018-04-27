@@ -18,7 +18,8 @@ function G = optimalLQR(A, B, C, D)
     % observer
     v = ones(1, 16); 
     Q = diag(v); % Equally weighs all variables
-    Q(14, 14) = 100; % Pendulum Angle - Set for large displacement, small maximum angle
+    % Q(14, 14) = 0.001; % Pendulum Angle - Set for large displacement, small maximum angle
+    % Q(13, 13) = 0.001;
     % Q(13, 13) = 1000; % Pendulum Displacement - Set for minimal displacement, larger angle
     Q(1, 1) = 100; % X Position
     Q(2, 2) = 100; % Y Position

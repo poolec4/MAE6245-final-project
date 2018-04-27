@@ -31,6 +31,8 @@ function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z, start_position,
     B(6, 13) = 1;
     B(13, 8) = 1;
     B(15, 11) = 1;
+    B(8, 11) = -1/g;
+    B(7, 12) = 1/g;
     % C Matrix
     C = zeros(16, 16);
     C(1, 1) = 1;
