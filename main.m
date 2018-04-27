@@ -1,7 +1,8 @@
 % Scott Barnes & Chris Poole
 % MAE 6245: Robotic Systems
 % Final Project 
-clc; clear; close all;
+clc; clear; 
+%close all;
 addpath('common_functions')
 
 % Simulates quadcopter with inverted pendulum
@@ -21,8 +22,8 @@ z_goal = 0;
 goal = [x_goal, y_goal, z_goal];
 tf = 10;
 % Create Trajectory
-t = 0:0.1:tf;
-[traj, vel, accel] = create_trajectory('circle',4,length(t),0, tf);
+t = 0:0.05:tf;
+[traj, vel, accel] = create_trajectory('fig8',4,length(t),0, tf);
 start = traj(:,1);
 goal = traj(:,end);
 
@@ -51,7 +52,8 @@ u = [zeros(4, length(t)); traj(1,:); traj(2,:); traj(3,:); vel(1,:); vel(2,:); v
 % Simulate Closed Loop System
 [y, t, x] = lsim(cl_Sys, u, t, x0); % Closed Loop System Clearly Stable
 inpt = G*x';
-figure;
+
+figure(1);
 subplot(3, 1, 1);
 plot(t, y(:, 1), 'r', t, y(:, 2), 'g', t, y(:, 3), 'b'); %, t, inpt, '--');
 title('Quadrotor Position');
@@ -72,9 +74,10 @@ ylabel('Magnitude (deg/meters)');
 xlabel('Time (sec)');
 axis tight;
 
-filename = 'E:\MAE6245-final-project\media\1dofpend.gif';
+% filename = 'E:\MAE6245-final-project\media\1dofpend_fig8.gif';
+filename = '/home/chris/MAE6245-final-project/media/1dofpend_fig8.gif';
 
-h = figure;
+h = figure(2);
 x_g = [y(1, 1), y(1, 2), y(1, 3)];
 eul = [y(1, 6), y(1, 7), y(1, 8)];
 draw_quadrotor(x_g, eul)
@@ -91,8 +94,9 @@ for i = 1:length(t)
     th = pi/2 - y(i,5);
     p_pend = x_g + [-L*cos(th), 0, L*sin(th)]; % relative to quad COM
     draw_vector(x_g, p_pend,'r')
+    plot3(traj(1,:),traj(2,:),traj(3,:),'r.')
     axis([-6 6 -6 6 -2 2])
-    % view(-0, 0)
+    view(-0, 0)
     drawnow
     f = getframe(gcf);
     im(:,:,1,i) = rgb2ind(f.cdata,map,'nodither');
