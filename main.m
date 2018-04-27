@@ -10,9 +10,9 @@ g = 9.8;
 M_r = 1000;
 m_p = 50;
 L = 1;
-I_x = 1e-5;
-I_y = 1e-5;
-I_z = 1e-5;
+I_x = 0.1;
+I_y = 0.1;
+I_z = 0.1;
 
 % Position Control:
 x_goal = 5;
@@ -70,6 +70,7 @@ title('Pendulum Angle and Position');
 legend('Position', 'Angle');
 ylabel('Magnitude (deg/meters)');
 xlabel('Time (sec)');
+axis tight;
 
 filename = 'E:\MAE6245-final-project\media\1dofpend.gif';
 
@@ -91,11 +92,13 @@ for i = 1:length(t)
     p_pend = x_g + [-L*cos(th), 0, L*sin(th)]; % relative to quad COM
     draw_vector(x_g, p_pend,'r')
     axis([-6 6 -6 6 -2 2])
-    view(-0, 0)
-    
+    % view(-0, 0)
     drawnow
     f = getframe(gcf);
     im(:,:,1,i) = rgb2ind(f.cdata,map,'nodither');
+    % Controller Input
+    disp('Controller Input:');
+    disp(-G*x(i, :)');
 end
 
 % imwrite(im,map,filename,'DelayTime',0,'LoopCount',inf)
