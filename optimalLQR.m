@@ -14,11 +14,11 @@
 %   G: Optimal LQR Controller
 
 function G = optimalLQR(A, B, C, D)
-    % Q = C'*C; % Equally Weighs Observed Variables. Ignores those not in
+    Q = C'*C; % Equally Weighs Observed Variables. Ignores those not in
     % observer
-    v = ones(1, 16); 
-    Q = diag(v); % Equally weighs all variables
-    % Q(14, 14) = 0.001; % Pendulum Angle - Set for large displacement, small maximum angle
+    % v = ones(1, 16); 
+    % Q = diag(v); % Equally weighs all variables
+    Q(14, 14) = 10; % Pendulum Angle - Set for large displacement, small maximum angle
     % Q(13, 13) = 0.001;
     % Q(13, 13) = 1000; % Pendulum Displacement - Set for minimal displacement, larger angle
     Q(1, 1) = 100; % X Position

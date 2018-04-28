@@ -96,7 +96,7 @@ for i = 1:length(t)
     draw_vector(x_g, p_pend,'r')
     plot3(traj(1,:),traj(2,:),traj(3,:),'r.')
     axis([-6 6 -6 6 -2 2])
-    view(-0, 0)
+    % view(-0, 0)
     drawnow
     f = getframe(gcf);
     im(:,:,1,i) = rgb2ind(f.cdata,map,'nodither');
