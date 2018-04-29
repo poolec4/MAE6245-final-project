@@ -23,7 +23,7 @@ goal = [x_goal, y_goal, z_goal];
 tf = 10;
 % Create Trajectory
 t = 0:0.05:tf;
-[traj, vel, accel] = create_trajectory('helix',1.5,length(t),0, tf);
+[traj, vel, accel] = create_trajectory('fig8',1.5,length(t),0, tf);
 start = traj(:,1);
 % start = [2,0,0.5];
 goal = traj(:,end);
@@ -112,7 +112,7 @@ for i = 1:length(t)
     draw_vector(x_g, p_pend,'r')
     plot3(traj(1,:),traj(2,:),traj(3,:),'r.')
     axis([-2.5 2.5 -2 2 -1 1])
-%     view(-0, 0)
+    view(-0, 0)
 %     ax1 = axes('Position',[0 0 1 1],'Visible','off');
 %     axes(ax1) % sets ax1 to current axes
 %     descr = {strcat('Quadrotor position: ',num2str(y(i, 1)),', ',num2str(y(i, 2)),', ',num2str(y(i, 3)))};
