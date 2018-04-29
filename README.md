@@ -12,7 +12,7 @@ cd MAE6245-final-project
 ```
 and run ```main.m```. Comments are included with instructions on how to test different trajectories.
 
-### Experimental Results: Animations
+### Experimental Results:
 
 #### Fly to Point
 ![Point GIF](https://github.com/poolec4/MAE6245-final-project/blob/master/media/1dofpend_origin.gif)
