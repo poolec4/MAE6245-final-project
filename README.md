@@ -15,10 +15,10 @@ and run ```main.m```. Comments are included with instructions on how to test dif
 ### Experimental Results: Animations
 
 #### Fly to Point
-![Demo GIF](https://github.com/poolec4/MAE6245-final-project/blob/master/media/1dofpend_origin.gif)
+![Point GIF](https://github.com/poolec4/MAE6245-final-project/blob/master/media/1dofpend_origin.gif)
 
-#### Stabilize Pendulum
-![Demo GIF](https://github.com/poolec4/MAE6245-final-project/blob/master/media/1dofpend.gif)
+#### Helix
+![Helix GIF](https://github.com/poolec4/MAE6245-final-project/blob/master/media/report/helix/1dofpend_helix.gif)
 
 #### Figure 8
-![Demo GIF](https://github.com/poolec4/MAE6245-final-project/blob/master/media/1dofpend_fig8.gif) 
+![Figure 8 GIF](https://github.com/poolec4/MAE6245-final-project/blob/master/media/report/fig8/1dofpend_fig8_side.gif) 
