@@ -1,9 +1,9 @@
 ## MAE6245-final-project
 #### By Scott Barnes and Christopher Poole
 
-### Download & Run:
-
 Full dynamic simulation, control, and vizualization of 6DoF quadrotor with attached inverted pendulum.
+
+### Download & Run:
 
 To run the simulation, download the repository as a zip file and extract it, or clone the repository using the command line,
 ```bash
