@@ -1,4 +1,7 @@
-%% is_observable
+% Scott Barnes & Chris Poole
+% MAE 6245: Robotic Systems
+% Final Project 
+
 %   Determines if a linear system is observable
 % Inputs:
 %   A: A Matrix of Linear System

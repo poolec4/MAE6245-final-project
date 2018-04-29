@@ -1,3 +1,9 @@
+% Scott Barnes & Chris Poole
+% MAE 6245: Robotic Systems
+% Final Project 
+
+% Test script to view plotting of quadrotor
+
 close all
 clear all
 clc

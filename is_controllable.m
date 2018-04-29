@@ -1,4 +1,7 @@
-%% is_controllable
+% Scott Barnes & Chris Poole
+% MAE 6245: Robotic Systems
+% Final Project 
+
 %   Determines if a linear system is controllable. 
 % Inputs:
 %   A: A Matrix of Linear System

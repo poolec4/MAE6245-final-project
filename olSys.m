@@ -1,3 +1,9 @@
+% Scott Barnes & Chris Poole
+% MAE 6245: Robotic Systems
+% Final Project 
+
+% Creates open loop state-space system for a quadrotor with attached
+% inverted pendulum
 
 function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z, start_position, goal_position)
     % Create A Matrix

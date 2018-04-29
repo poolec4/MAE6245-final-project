@@ -1,4 +1,10 @@
-%close all
+% Scott Barnes & Chris Poole
+% MAE 6245: Robotic Systems
+% Final Project 
+
+% Test script to view coordinate frame transformations
+
+close all
 clear all
 clc
 

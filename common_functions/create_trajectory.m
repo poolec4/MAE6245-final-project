@@ -1,3 +1,11 @@
+% Scott Barnes & Chris Poole
+% MAE 6245: Robotic Systems
+% Final Project 
+
+% Computes position, velocity, and acceleration data for several
+% trajectories. The shape, size, and length of the trajectory can be
+% modified easily from the main script
+
 function [traj, vel, accel] = create_trajectory(shape, size, num_points,z, tf)
     if(strcmp(shape,'origin'))
         x = zeros(1,num_points);

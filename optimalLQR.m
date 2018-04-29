@@ -1,4 +1,10 @@
-%% optimal_lqr
+% Scott Barnes & Chris Poole
+% MAE 6245: Robotic Systems
+% Final Project 
+
+% Creates open loop state-space system for a quadrotor with attached
+% inverted pendulum
+
 %   Generates Optimal LQR Controller. 
 % Inputs
 %   A: A matrix of Open Loop System
