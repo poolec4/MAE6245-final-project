@@ -50,7 +50,7 @@ function [A, B, C, D, x0] = olSys(g, M_q, m_p, L, I_x, I_y, I_z, start_position,
     D(3, 7) = 1;
     % Initial State
     x0 = zeros(1, 16);
-    x0(14) = 0; % Offset Starting Angle
+    x0(14) = deg2rad(-5); % Offset Starting Angle
     x0(1) = start_position(1)-goal_position(1);
     x0(2) = start_position(2)-goal_position(2);
     x0(3) = start_position(3)-goal_position(3);

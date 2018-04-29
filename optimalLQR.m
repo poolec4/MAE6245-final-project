@@ -1,10 +1,5 @@
 %% optimal_lqr
 %   Generates Optimal LQR Controller. 
-% Authorship:
-%   Scott Barnes
-%   The George Washington University
-%   MAE 6245: Robotic Systems
-%   Final Project: Quadrotor Control
 % Inputs
 %   A: A matrix of Open Loop System
 %   B: B matrix of Open Loop System
@@ -18,12 +13,12 @@ function G = optimalLQR(A, B, C, D)
     % observer
     % v = ones(1, 16); 
     % Q = diag(v); % Equally weighs all variables
-    Q(14, 14) = 10; % Pendulum Angle - Set for large displacement, small maximum angle
+    Q(14, 14) = 1; % Pendulum Angle - Set for large displacement, small maximum angle
     % Q(13, 13) = 0.001;
     % Q(13, 13) = 1000; % Pendulum Displacement - Set for minimal displacement, larger angle
-    Q(1, 1) = 100; % X Position
-    Q(2, 2) = 100; % Y Position
-    Q(3, 3) = 100; % Z Position
+    Q(1, 1) = 10; % X Position
+    Q(2, 2) = 10; % Y Position
+    Q(3, 3) = 10; % Z Position
     v = ones(size(B, 2), 1);
     R = diag(v);
     % R = 1;

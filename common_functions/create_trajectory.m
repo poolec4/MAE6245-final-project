@@ -1,15 +1,27 @@
 function [traj, vel, accel] = create_trajectory(shape, size, num_points,z, tf)
+    if(strcmp(shape,'origin'))
+        x = zeros(1,num_points);
+        y = zeros(1,num_points);
+        z = zeros(1,num_points);
+    end
     if(strcmp(shape,'circle'))
         th = linspace(0, 2*pi, num_points);
         x = size*cos(th);
         y = size*sin(th);
+        z = z*ones(1,length(th));
     end
     if(strcmp(shape,'fig8'))
         th = linspace(0, 2*pi, num_points);
         x = size*cos(th);
-        y = 0.25*size*sin(2*th);
+        y = 0.5*size*sin(2*th);
+        z = z*ones(1,length(th));
     end
-    z = z*ones(1,length(th));
+    if(strcmp(shape,'helix'))
+        th = linspace(0, 2*pi, num_points);
+        x = 0.8*size*cos(2*th);
+        y = 0.8*size*sin(2*th);
+        z = 0.08*th+z;
+    end
     traj = [x;y;z];
     vel = [];
     dt = tf/num_points;

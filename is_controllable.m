@@ -1,10 +1,5 @@
 %% is_controllable
 %   Determines if a linear system is controllable. 
-% Authorship:
-%   Scott Barnes
-%   The George Washington University
-%   MAE 6246: Electromechanical Control Systems
-%   Final Project: Inverted Pendulum
 % Inputs:
 %   A: A Matrix of Linear System
 %   B: B Matrix of Linear System

@@ -1,10 +1,5 @@
 %% is_observable
 %   Determines if a linear system is observable
-% Authorship:
-%   Scott Barnes
-%   The George Washington University
-%   MAE 6246: Electromechanical Control Systems
-%   Final Project: Inverted Pendulum
 % Inputs:
 %   A: A Matrix of Linear System
 %   C: C Matrix of Linear System
